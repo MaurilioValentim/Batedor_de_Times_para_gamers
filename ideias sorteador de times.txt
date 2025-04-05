@@ -1,0 +1,25 @@
+
+Guardar o nome dos jogadores no banco de dados
+Esquema de pontuação: Inicia com 10
+
+Funções:
+    Randomizar os times ( sem peso e sem pontos)
+    Randomizar os times (vitoria e derrota )
+    Randomizar os times (peso, vitoria e derrota )
+
+    Adicionar novos jogadores
+    Exluir jogadores
+    Atribuir vencedor (para base de dados)
+
+
+Adiciona os jogadores
+Escolher os jogadores para as partidas
+Iniciar o sorteador de times
+    Time 1  x  Time 2 (Criar personalização de nomes de equipes)
+    Player1 x  Player6
+    Player2 x  Player7
+    Player3 x  Player8
+    Player4 x  Player9
+    Player5 x  Player10
+
+Time vencedor - Time 1 x Time 2
