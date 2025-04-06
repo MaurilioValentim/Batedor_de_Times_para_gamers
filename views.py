@@ -112,10 +112,6 @@ def listar_jogadores():
 
 
 
-
-
 # # Funcao para atualizar o rank da pessoa
 # def atualizar_rank(rank = Rank):   # Entradas rank_do_lol,   rank_local, pontuacao
 #     with Session(engine) as session:    
-
-
