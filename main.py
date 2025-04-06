@@ -14,14 +14,13 @@ jogadores_escolhidos = []   #Guarda os 10 jogadores escolhidos para em seguida r
 
 # Mica gay da o cu
 
-input("Sou viadinho, meu nome [e mika]")
 def adicionar_jogadores():#Adiciona novos jogadores à lista de jogadores
     while True:
         try:
             jogador = input("Nome ou Apelido do jogador: ").strip()
             if not jogador:
                 raise ValueError("O campo deve ser preenchido!\n")
-            criar_conta(Conta(nome_real = "Mika", nick = jogador, hashtag = "BR1"))
+            criar_conta(Conta(nome_real = None, nick = jogador, hashtag = "BR1"))
             print(jogador + " foi adicionado\n")
             
             novo_jogador = input("Deseja adicionar outro jogador (S / N): ").upper()

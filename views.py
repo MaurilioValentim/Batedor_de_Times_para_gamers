@@ -2,6 +2,10 @@ from models import Conta, Rank, Partida, Historico, engine
 from sqlmodel import Session, select
 from datetime import date
 
+from models import Conta, Rank, Partida, Historico, engine
+from sqlmodel import Session, select
+from datetime import date
+
 #Funcao para criar a conta. Possui as Entradas nome_real, nick e hashtag. Alem disso o Nome_real pode ser None
 
 def criar_conta(conta: Conta):  # Entradas Nome_real , Nick ,  hashtag
