@@ -13,6 +13,7 @@ lista_jogadores = ["Ajala", "Ale", "Arthur", "Bernardin", "Bernardo", "Gouveia",
 jogadores_escolhidos = []   #Guarda os 10 jogadores escolhidos para em seguida realizar o sorteio
 
 # Mica gay da o cu
+#Adicionando comentario para o Melquinho
 
 def adicionar_jogadores():#Adiciona novos jogadores à lista de jogadores
     while True:
