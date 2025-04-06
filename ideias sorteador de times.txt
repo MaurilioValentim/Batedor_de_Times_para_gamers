@@ -13,7 +13,9 @@ Funções:
 
 
 Adiciona os jogadores
+
 Escolher os jogadores para as partidas
+
 Iniciar o sorteador de times
     Time 1  x  Time 2 (Criar personalização de nomes de equipes)
     Player1 x  Player6
