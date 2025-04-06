@@ -6,8 +6,14 @@ from models import Conta, Rank, Partida, Historico, engine
 from sqlmodel import Session, select
 from datetime import date
 
-#Funcao para criar a conta. Possui as Entradas nome_real, nick e hashtag. Alem disso o Nome_real pode ser None
 
+#====================================================================================================================================
+#
+#       Parte das Funcoes da Conta
+#
+#====================================================================================================================================
+
+#Funcao para criar a conta. Possui as Entradas nome_real, nick e hashtag. Alem disso o Nome_real pode ser None
 def criar_conta(conta: Conta):  # Entradas Nome_real , Nick ,  hashtag
     with Session(engine) as session:
         if conta.nome_real is not None:
@@ -110,12 +116,121 @@ def listar_jogadores():
         jogadores = [[conta.nome_real, conta.nick, conta.hashtag] for conta in contas]
         return jogadores
 
+#====================================================================================================================================
+#
+#       Parte das Funcoes do Ranked
+#
+#====================================================================================================================================
 
 
+# Funcao para adicionar o rank da pessoa, precisa enviar todos os dados
+def adicionar_rank(nick: str, hashtag: str, rank_do_lol: str, rank_local: str, pontuacao: float) -> str:
+    with Session(engine) as session:
+        # Busca a conta pelo nick e hashtag
+        conta = session.exec(
+            select(Conta).where(Conta.nick == nick, Conta.hashtag == hashtag)
+        ).first()
+
+        if not conta:
+            return "Erro: Conta não encontrada."
+
+        # Cria e adiciona o novo Rank
+        novo_rank = Rank(
+            conta_id=conta.id,
+            rank_do_lol=rank_do_lol,
+            rank_local=rank_local,
+            pontuacao=pontuacao
+        )
+
+        session.add(novo_rank)
+        session.commit()
+        session.refresh(novo_rank)
+
+        print(f"Rank adicionado com sucesso para {conta.nick}#{conta.hashtag}!")
+        return 
+
+# Funcao para obter informacoes do rank da pessoa, precisa do Nome Real ou do Nick
+def informacoes_rank(nome_real: str = None, nick: str = None):
+    with Session(engine) as session:
+        # Consulta a conta com base no nome_real ou nick
+        query = select(Conta).where(
+            (Conta.nome_real == nome_real) if nome_real else (Conta.nick == nick)
+        )
+        conta = session.exec(query).first()
+
+        if not conta:
+            return "Conta não encontrada."
+
+        # Acessa o relacionamento com Rank
+        if conta.rank:
+            return {
+                "nick": conta.nick,
+                "hashtag": conta.hashtag,
+                "rank_do_lol": conta.rank.rank_do_lol,
+                "rank_local": conta.rank.rank_local,
+                "pontuacao": conta.rank.pontuacao
+            }
+        else:
+            return "Esta conta não possui informações de rank."
+
+# Funcao para excluir o rank da pessoa
+def excluir_rank(nick: str, hashtag: str) -> str:
+    with Session(engine) as session:
+        conta = session.exec(
+            select(Conta).where(Conta.nick == nick, Conta.hashtag == hashtag)
+        ).first()
+
+        if not conta:
+            return "Erro: Conta não encontrada."
+
+        rank = session.exec(
+            select(Rank).where(Rank.conta_id == conta.id)
+        ).first()
+
+        if not rank:
+            return "Erro: Essa conta não possui rank para excluir."
+
+        session.delete(rank)
+        session.commit()
+        return f"Rank excluído com sucesso para {nick}#{hashtag}!"
 
 
-# # Funcao para atualizar o rank da pessoa
-# def atualizar_rank(rank = Rank):   # Entradas rank_do_lol,   rank_local, pontuacao
-#     with Session(engine) as session:    
+# Funcao para atualizar o rank de uma pessoa
+def atualizar_rank(nick: str, hashtag: str, rank_do_lol: str = None, rank_local: str = None, pontuacao: float = None) -> str:
+    with Session(engine) as session:
+        conta = session.exec(
+            select(Conta).where(Conta.nick == nick, Conta.hashtag == hashtag)
+        ).first()
+
+        if not conta:
+            return "Erro: Conta não encontrada."
+
+        rank = session.exec(
+            select(Rank).where(Rank.conta_id == conta.id)
+        ).first()
+
+        if not rank:
+            return "Erro: Essa conta não possui rank para atualizar."
+
+        # Atualiza apenas os valores que foram passados
+        if rank_do_lol is not None:
+            rank.rank_do_lol = rank_do_lol
+        if rank_local is not None:
+            rank.rank_local = rank_local
+        if pontuacao is not None:
+            rank.pontuacao = pontuacao
+
+        session.add(rank)
+        session.commit()
+        session.refresh(rank)
+
+        return f"Rank atualizado com sucesso para {nick}#{hashtag}!"
+
+
+#====================================================================================================================================
+#
+#       Parte das Funcoes da Partida
+#
+#====================================================================================================================================
 
 
