@@ -12,8 +12,6 @@ os.system('cls' if os.name == 'nt' else 'clear')
 lista_jogadores = ["Ajala", "Ale", "Arthur", "Bernardin", "Bernardo", "Gouveia", "Guguin", "Gustavo", "Leonardo", "Lucas", "Malks", "Mikael", "Nicolas"]
 jogadores_escolhidos = []   #Guarda os 10 jogadores escolhidos para em seguida realizar o sorteio
 
-# Mica gay da o cu
-#Adicionando comentario para o Melquinho
 
 def adicionar_jogadores():#Adiciona novos jogadores à lista de jogadores
     while True:
