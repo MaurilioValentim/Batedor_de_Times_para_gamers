@@ -1,6 +1,9 @@
 import os #Limpa o terminal
 import random #Gera a aleatoriedade
 import time #Possibilita a utilização do sleep (Espera)
+from views import criar_conta
+from models import Conta
+
 
 # Limpar o terminal
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -18,7 +21,7 @@ def adicionar_jogadores():#Adiciona novos jogadores à lista de jogadores
             jogador = input("Nome ou Apelido do jogador: ").strip()
             if not jogador:
                 raise ValueError("O campo deve ser preenchido!\n")
-            lista_jogadores.append(jogador)
+            criar_conta(Conta(nome_real = "Mika", nick = jogador, hashtag = "BR1"))
             print(jogador + " foi adicionado\n")
             
             novo_jogador = input("Deseja adicionar outro jogador (S / N): ").upper()
@@ -165,6 +168,6 @@ def pause():#Efeito de pausa tempo (simula tela de carregamento)
     input("Equipes criadas! Pressione ENTER para continuar...")
 
 
-
+adicionar_jogadores()
 
 #Para executar o código chame as funçoes
