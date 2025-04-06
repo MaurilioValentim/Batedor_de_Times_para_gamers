@@ -1,14 +1,3 @@
-print("Hello World!")
-input("Digite seu nome: ")
-print("Hello World!")
-input("Digite seu nome: ")
-input("Digite seu nome: ")
-print("Hello World!")
-input("Digite seu nome: ")
-print("Hello World!")
-input("Digite seu nome: ")
-print("Hello World!")
-input("Digite seu nome: ")
 import os #Limpa o terminal
 import random #Gera a aleatoriedade
 import time #Possibilita a utilização do sleep (Espera)
